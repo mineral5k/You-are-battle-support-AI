@@ -11,6 +11,8 @@ public class UnitState
     public int shield;
     public List<SkillData> skills = new List<SkillData>();
     public List<SkillData> Selectableskills = new List<SkillData>();
+    private List<StatusEffect> statusEffects = new List<StatusEffect>();
+    public List <StatusEffect> StatusEffects => statusEffects;
 
 
     public int TakeDamage(int damage)
@@ -40,6 +42,21 @@ public class UnitState
         return skills
             .Where(skill => skill.CanUse(currentMana))
             .ToList();
+    }
+
+    public void AddStatusEffect(StatusEffect newEffect)
+    {
+        StatusEffect existingEffect =statusEffects.Find(effect => effect.Id == newEffect.Id);
+
+        if (existingEffect != null)
+        {
+            existingEffect.Merge(newEffect);
+
+            return;
+        }
+
+        
+        statusEffects.Add(newEffect);
     }
 
 }

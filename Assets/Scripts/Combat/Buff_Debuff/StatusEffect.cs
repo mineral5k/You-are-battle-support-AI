@@ -1,0 +1,48 @@
+using UnityEngine;
+
+public abstract class StatusEffect
+{
+    public abstract string Id { get; }
+    public abstract string EffectName { get; }
+    public abstract bool IsBuff { get; }
+
+    public int Amount { get; protected set; }
+    public int RemainingTurns { get; protected set; }
+
+    public bool IsExpired => RemainingTurns <= 0;
+
+    protected StatusEffect(int amount, int duration)
+    {
+        Amount = amount;
+        RemainingTurns = duration;
+    }
+
+    public virtual int ModifyActionValue(UnitState owner,SkillData skill,int value)
+    {
+        return value;
+    }
+
+    public virtual int ModifyIncomingDamage(UnitState owner,int damage)
+    {
+        return damage;
+    }
+
+    public virtual void OnTurnEnd(UnitState owner)
+    {
+    }
+
+    public virtual void Merge(StatusEffect newEffect)
+    {
+        Amount += newEffect.Amount;
+
+        RemainingTurns = Mathf.Max(
+            RemainingTurns,
+            newEffect.RemainingTurns);
+    }
+
+    public void ProcessTurnEnd(UnitState owner)
+    {
+        OnTurnEnd(owner);
+        RemainingTurns--;
+    }
+}

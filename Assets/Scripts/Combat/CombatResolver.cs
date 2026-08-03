@@ -36,7 +36,7 @@ public class CombatResolver
         if (action.skill.category == ActionCategory.Attack)
             return;
 
-        action.skill.Effect(unit,enemy);
+        action.skill.Effect(unit,enemy,action.finalValue);
     }
 
     public void AttackPhase(UnitState ally, SelectedAction allyAction, UnitState enemy, SelectedAction enemyAction)
@@ -45,11 +45,11 @@ public class CombatResolver
         {
             if (allyAction.finalValue > enemyAction.finalValue)
             {
-                allyAction.skill.Effect(ally, enemy);
+                allyAction.skill.Effect(ally, enemy,allyAction.finalValue);
             }
             else if (enemyAction.finalValue > allyAction.finalValue)
             {
-                enemyAction.skill.Effect(enemy, ally);
+                enemyAction.skill.Effect(enemy, ally,enemyAction.finalValue);
             }
             else
             {
@@ -59,11 +59,11 @@ public class CombatResolver
 
         else if (allyAction.skill.category == ActionCategory.Attack)
         {
-            allyAction.skill.Effect(ally,enemy);
+            allyAction.skill.Effect(ally,enemy,allyAction.finalValue);
         }
         else if (enemyAction.skill.category == ActionCategory.Attack)
         {
-            enemyAction.skill.Effect(enemy,ally);
+            enemyAction.skill.Effect(enemy,ally,enemyAction.finalValue);
         }
     }
 
@@ -81,6 +81,8 @@ public class CombatResolver
 
         allyAction.skill.StartCooldown();
         enemyAction.skill.StartCooldown();
+        ally.shield = 0;
+        enemy.shield = 0;
     }
 
 }

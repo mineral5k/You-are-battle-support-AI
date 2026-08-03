@@ -4,6 +4,7 @@ using UnityEngine;
 public class SkillData 
 {
     public string skillName;
+    public string skillDescription;
     public ActionCategory category;
     public ManaCostType manaCostType;
 
@@ -44,7 +45,7 @@ public class SkillData
         };
     }
 
-    public void Effect(UnitState ally, UnitState enemy)
+    public virtual void Effect(UnitState ally, UnitState enemy,int value)
     {
 
     }
