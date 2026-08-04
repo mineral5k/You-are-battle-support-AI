@@ -18,6 +18,8 @@ public class FlameStrike : SkillData
 
         baseValue = 0;
         valuePerMana = 3;
+
+        cooltime = 3;
     }
 
     public override void Effect( UnitState ally, UnitState enemy, int value )

@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class BattleManager
 {
-    UnitState ally;
-    UnitState enemy;
-    TurnProcesser turnProcesser;
+    public UnitState ally;
+    public UnitState enemy;
+    public TurnProcesser turnProcesser;
     public int allyStartHP;
 
     public BattleManager(UnitState ally,UnitState enemy)

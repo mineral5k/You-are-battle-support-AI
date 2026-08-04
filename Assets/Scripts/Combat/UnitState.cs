@@ -6,9 +6,9 @@ using UnityEngine;
 [System.Serializable]
 public class UnitState 
 {
-    public int currentHp;
-    public int currentMana;
-    public int shield;
+    public int currentHp = 50;
+    public int currentMana = 2;
+    public int shield = 0;
     public List<SkillData> skills = new List<SkillData>();
     public List<SkillData> Selectableskills = new List<SkillData>();
     private List<StatusEffect> statusEffects = new List<StatusEffect>();
@@ -39,9 +39,20 @@ public class UnitState
     }
     public List<SkillData> GetSelectableSkills()
     {
-        return skills
-            .Where(skill => skill.CanUse(currentMana))
-            .ToList();
+        Selectableskills.Clear();
+        foreach(SkillData skill in skills)
+        {
+            if(skill.CanUse(currentMana))
+            {
+                Selectableskills.Add(skill);
+            }
+        }
+        return Selectableskills;
+    }
+
+    public void AddSkillData(SkillData skill)
+    {
+        skills .Add(skill);
     }
 
     public void AddStatusEffect(StatusEffect newEffect)

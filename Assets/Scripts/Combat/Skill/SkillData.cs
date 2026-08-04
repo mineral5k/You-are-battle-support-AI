@@ -32,7 +32,7 @@ public class SkillData
 
     public bool CanUse(int currentMana)
     {
-        return (fixedManaCost >= currentMana) && (currentCooldown == 0);
+        return (fixedManaCost <= currentMana) && (currentCooldown == 0);
     }
 
     public int CalculateValue(int spentMana)
