@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class FlameStrike : SkillData
 {
-    private const int BurnAmount = 5;
+    private int burnAmount = 5;
 
-    private readonly int burnDuration=5;
+    private int burnDuration=5;
 
     public FlameStrike()
     {
         skillName = "화염 강타";
+        skillDescription = "마나를 최대 6까지 소모하여, 소모한 마나당 3의 위력으로 적을 공격한다. 피해를 입혔다면 화상을 5부여한다.";
         category = ActionCategory.Attack;
 
         manaCostType = ManaCostType.Variable;
@@ -31,7 +32,7 @@ public class FlameStrike : SkillData
 
         enemy.AddStatusEffect(
             new Burn(
-                damage: BurnAmount,
+                damage: burnAmount,
                 duration: burnDuration));
     }
 }
