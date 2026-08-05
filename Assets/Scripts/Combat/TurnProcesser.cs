@@ -32,9 +32,21 @@ public class TurnProcesser
         enemyAction = new SelectedAction(enemySkill, enemy.currentMana);
     }
 
+    public void StartTurn()
+    {
+        ally.OnTurnStart();
+        enemy.OnTurnStart();
+    }
+
     public void StartCombat()
     {
         combatResolver.ResolveTurn(ally, allyAction, enemy, enemyAction);
+    }
+
+    public void EndTurn()
+    {
+        ally.OnTurnEnd();
+        enemy.OnTurnEnd();
         turn++;
     }
 

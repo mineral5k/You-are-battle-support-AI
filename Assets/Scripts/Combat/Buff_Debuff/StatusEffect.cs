@@ -17,16 +17,10 @@ public abstract class StatusEffect
         RemainingTurns = duration;
     }
 
-    public virtual int ModifyActionValue(UnitState owner,SkillData skill,int value)
+    public virtual void OnTurnStart(UnitState owner)
     {
-        return value;
-    }
 
-    public virtual int ModifyIncomingDamage(UnitState owner,int damage)
-    {
-        return damage;
     }
-
     public virtual void OnTurnEnd(UnitState owner)
     {
     }
@@ -35,9 +29,7 @@ public abstract class StatusEffect
     {
         Amount += newEffect.Amount;
 
-        RemainingTurns = Mathf.Max(
-            RemainingTurns,
-            newEffect.RemainingTurns);
+        RemainingTurns = Mathf.Max(RemainingTurns, newEffect.RemainingTurns);
     }
 
     public void ProcessTurnEnd(UnitState owner)

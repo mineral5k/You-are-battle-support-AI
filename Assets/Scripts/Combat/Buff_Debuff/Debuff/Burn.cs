@@ -14,5 +14,6 @@ public class Burn : StatusEffect
     public override void OnTurnEnd(UnitState owner)
     {
         owner.TakeDamage(Amount);
+        Debug.Log("화상 피해" + Amount);
     }
 }

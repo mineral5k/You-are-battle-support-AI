@@ -9,14 +9,14 @@ public class SampleSetting : MonoBehaviour
     {
         ally = new UnitState();
         enemy = new UnitState();
-        ally.AddMana(3);
-        ally.AddSkillData(new FlameStrike());
-        enemy.AddSkillData(new FlameStrike());
         bm = new BattleManager(ally, enemy);
-        bm.turnProcesser.ProcessTurn();
-        
-        
+        bm.ProcessBlindTurn();
+        bm.ProcessBlindTurn();
+        bm.ProcessBlindTurn();
+        bm.ProcessBlindTurn();
+        bm.ProcessBlindTurn();
+
     }
 
-    
+
 }

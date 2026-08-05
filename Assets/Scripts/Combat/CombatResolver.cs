@@ -41,15 +41,17 @@ public class CombatResolver
 
     public void AttackPhase(UnitState ally, SelectedAction allyAction, UnitState enemy, SelectedAction enemyAction)
     {
+        int allyFinalValue = allyAction.finalValue + ally.AttackUp;
+        int enemyFinalValue = enemyAction.finalValue + enemy.AttackUp;
         if (allyAction.skill.category == ActionCategory.Attack && enemyAction.skill.category == ActionCategory.Attack)
         {
-            if (allyAction.finalValue > enemyAction.finalValue)
+            if (allyFinalValue > enemyFinalValue)
             {
-                allyAction.skill.Effect(ally, enemy,allyAction.finalValue);
+                allyAction.skill.Effect(ally, enemy,allyFinalValue);
             }
-            else if (enemyAction.finalValue > allyAction.finalValue)
+            else if (enemyAction.finalValue > allyFinalValue)
             {
-                enemyAction.skill.Effect(enemy, ally,enemyAction.finalValue);
+                enemyAction.skill.Effect(enemy, ally, enemyFinalValue);
             }
             else
             {
@@ -59,11 +61,11 @@ public class CombatResolver
 
         else if (allyAction.skill.category == ActionCategory.Attack)
         {
-            allyAction.skill.Effect(ally,enemy,allyAction.finalValue);
+            allyAction.skill.Effect(ally,enemy,allyFinalValue);
         }
         else if (enemyAction.skill.category == ActionCategory.Attack)
         {
-            enemyAction.skill.Effect(enemy,ally,enemyAction.finalValue);
+            enemyAction.skill.Effect(enemy,ally, enemyFinalValue);
         }
     }
 

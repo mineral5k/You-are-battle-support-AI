@@ -14,10 +14,10 @@ public class FlameStrike : SkillData
 
         manaCostType = ManaCostType.Variable;
 
-        fixedManaCost = 0;
+        fixedManaCost = 1;
         maxManaCost = 6;
 
-        baseValue = 0;
+        baseValue = 3;
         valuePerMana = 3;
 
         cooltime = 3;
@@ -30,9 +30,6 @@ public class FlameStrike : SkillData
         if (hpDamage <= 0)
             return;
 
-        enemy.AddStatusEffect(
-            new Burn(
-                damage: burnAmount,
-                duration: burnDuration));
+        enemy.AddStatusEffect( new Burn(damage: burnAmount, duration: burnDuration));
     }
 }
