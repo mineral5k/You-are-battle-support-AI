@@ -1,13 +1,26 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
-public class UnitState 
+public class UnitState
 {
     public UnitState target;
-    public int currentHp = 50;
+    public event Action OnStatusChanged;
+    public int maxHp = 50;
+    public int currentHp
+    {
+        get { return currentHp; }
+        private set
+        {
+            int newHp = Mathf.Clamp(value, 0, maxHp);
+            if (currentHp == newHp)
+            currentHp = newHp;
+            OnStatusChanged?.Invoke();
+        }
+    }
     public int currentMana = 2;
     public int shield = 0;
     public List<SkillData> skills = new List<SkillData>();
