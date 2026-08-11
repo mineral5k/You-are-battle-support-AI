@@ -28,8 +28,8 @@ public class TurnProcesser
         SkillData enemySkill = enemy.Selectableskills[Random.Range(0, enemy.Selectableskills.Count - 1)];
         allySkillRecord.Insert(turn, allySkill);
         enemySkillRecord.Insert(turn, enemySkill);
-        allyAction = new SelectedAction(allySkill,ally.currentMana);
-        enemyAction = new SelectedAction(enemySkill, enemy.currentMana);
+        allyAction = new SelectedAction(allySkill,ally.CurrentMana);
+        enemyAction = new SelectedAction(enemySkill, enemy.CurrentMana);
     }
 
     public void StartTurn()

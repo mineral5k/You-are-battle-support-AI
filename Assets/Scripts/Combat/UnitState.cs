@@ -10,18 +10,35 @@ public class UnitState
     public UnitState target;
     public event Action OnStatusChanged;
     public int maxHp = 50;
-    public int currentHp
+    private int currentHp = 50;
+    public int CurrentHp
     {
-        get { return currentHp; }
+        get => currentHp; 
         private set
         {
             int newHp = Mathf.Clamp(value, 0, maxHp);
-            if (currentHp == newHp)
             currentHp = newHp;
+            OnStatusChanged?.Invoke();
+        } 
+    }
+    private int MaxMana = 10;
+    private int currentMana = 2;
+    public int CurrentMana
+    {
+        get => currentMana;
+
+        private set
+        {
+            int newMana = Mathf.Clamp(value, 0, MaxMana);
+
+            if (currentMana == newMana)
+                return;
+
+            currentMana = newMana;
+
             OnStatusChanged?.Invoke();
         }
     }
-    public int currentMana = 2;
     public int shield = 0;
     public List<SkillData> skills = new List<SkillData>();
     public List<SkillData> Selectableskills = new List<SkillData>();
@@ -60,14 +77,19 @@ public class UnitState
 
         int hpDamage = damage - absorbedDamage;
         if (hpDamage > 0) IsDamagedThisTurn = true;
-        currentHp = Mathf.Max(0, currentHp - hpDamage);
+        CurrentHp = Mathf.Max(0, CurrentHp - hpDamage);
 
         return hpDamage;
     }
 
     public void AddMana(int amount)
     {
-        currentMana += Mathf.Max(0, amount);
+        CurrentMana += Mathf.Max(0, amount);
+    }
+
+    public void SpendMana(int amount)
+    {
+        CurrentMana -= Mathf.Max(0, amount);
     }
 
     public void AddShield(int amount)
@@ -109,7 +131,7 @@ public class UnitState
     public void OnTurnStart()
     {
         IsDamagedThisTurn = false;
-        currentMana++;
+        CurrentMana++;
         foreach (StatusEffect Effect in statusEffects)
         {
             Effect.OnTurnStart(this);

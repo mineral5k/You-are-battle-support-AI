@@ -16,12 +16,12 @@ public class CombatResolver
 
     public void PrepairAction(UnitState unit, SelectedAction action)
     {
-        if (unit.currentMana < action.spentMana)
+        if (unit.CurrentMana < action.spentMana)
         {
             throw new System.InvalidOperationException("현재 마나로 사용할 수 없는 스킬입니다.");
         }
 
-        unit.currentMana -= action.spentMana;
+        unit.SpendMana(action.spentMana);
     }
 
 

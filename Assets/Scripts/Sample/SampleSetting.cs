@@ -5,10 +5,12 @@ public class SampleSetting : MonoBehaviour
     public UnitState ally;
     public UnitState enemy;
     public BattleManager bm;
+    public HPBarUI ui;
     void Start()
     {
         ally = new UnitState();
         enemy = new UnitState();
+        ui.Bind(ally);
         bm = new BattleManager(ally, enemy);
         bm.ProcessBlindTurn();
         bm.ProcessBlindTurn();

@@ -19,7 +19,7 @@ public class BattleManager
         ally.target = enemy;
         enemy.target = ally;
         turnProcesser = new TurnProcesser(ally, enemy);
-        allyStartHP = ally.currentHp;
+        allyStartHP = ally.CurrentHp;
     }
 
     public void ProcessBlindTurn()
