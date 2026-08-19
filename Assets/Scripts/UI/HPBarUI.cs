@@ -5,26 +5,23 @@ using UnityEngine.UI;
 public class HPBarUI : MonoBehaviour
 {
     [Header("HP")]
-    [SerializeField]
-    private Image hpFill;
-
-    [SerializeField]
-    private TMP_Text hpText;
+    [SerializeField] private Image hpFill;
+    [SerializeField] private TMP_Text hpText;
 
     [Header("Mana")]
     [SerializeField] private Image[] manaGems;
-
     [SerializeField] private Color activeManaColor = Color.white;
+    [SerializeField] private Color inactiveManaColor = new Color(0.3f, 0.4f, 0.5f, 1f);
 
-    [SerializeField]
-    private Color inactiveManaColor = new Color(0.3f, 0.4f, 0.5f, 1f);
-
+    [SerializeField] private SkillContainer skillContainer;
     private UnitState unit;
 
     public void Bind(UnitState target)
     {
         unit = target;
         unit.OnStatusChanged += Refresh;
+        skillContainer.Init(unit);
+
         Refresh();
     }
 
@@ -49,5 +46,6 @@ public class HPBarUI : MonoBehaviour
 
             manaGems[i].color = i < currentMana ? activeManaColor : inactiveManaColor;
         }
+        skillContainer.Refresh();
     }
 }

@@ -61,11 +61,11 @@ public class UnitState
     public UnitState()
     {
         AddSkillData(new DefaultAttack());
-        AddSkillData(new DefaultDeffense());
-        AddSkillData(new DefaultCharge());
         AddSkillData(new FlameStrike());
-        AddSkillData(new PowerCharge());
+        AddSkillData(new DefaultDeffense());
         AddSkillData(new PoisonedArmor());
+        AddSkillData(new DefaultCharge());
+        AddSkillData(new PowerCharge());
     }
 
     public int TakeDamage(int damage)
