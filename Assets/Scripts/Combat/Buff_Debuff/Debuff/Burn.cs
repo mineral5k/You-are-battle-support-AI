@@ -8,7 +8,7 @@ public class Burn : StatusEffect
 
     public Burn(int damage,int duration) : base(damage, duration)
     {
-
+       
     }
 
     public override void OnTurnEnd(UnitState owner)

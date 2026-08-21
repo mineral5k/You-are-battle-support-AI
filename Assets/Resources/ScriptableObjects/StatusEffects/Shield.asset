@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6904375e70363154b9369e14a99ff464, type: 3}
+  m_Name: Shield
+  m_EditorClassIdentifier: Assembly-CSharp::StatusEffectsSO
+  icon: {fileID: -6717884257390833292, guid: 4d729aa1e80382441bfc7381d40b9ce9, type: 3}
+  name: "\uBC29\uC5B4\uB3C4"
+  description: "\uCCB4\uB825 \uD53C\uD574\uB97C \uC785\uC744 \uC2DC \uB300\uC2E0
+    \uBC29\uC5B4\uB3C4\uAC00 \uC18C\uBAA8\uB41C\uB2E4."

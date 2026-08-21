@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6904375e70363154b9369e14a99ff464, type: 3}
+  m_Name: AttackUp
+  m_EditorClassIdentifier: Assembly-CSharp::StatusEffectsSO
+  icon: {fileID: -8307069055350043731, guid: 1b21e9e07bc8eb5479c97cc09deeb255, type: 3}
+  name: "\uACF5\uACA9 \uC704\uB825 \uC99D\uAC00"
+  description: "\uACF5\uACA9\uC2DC \uD53C\uD574\uB7C9\uC744 \uC218\uCE58\uB9CC\uD07C
+    \uB298\uB9B0\uB2E4"

@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -16,6 +18,8 @@ public class SkillData
 
     public int baseValue;
     public int valuePerMana;
+
+    public List<StatusEffectType> SEList = new List<StatusEffectType>();
 
     public int CalculateManaCost(int currentMana)
     {

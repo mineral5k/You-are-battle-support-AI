@@ -18,6 +18,9 @@ public class DefaultDeffense : SkillData
         valuePerMana = 0;
 
         cooltime = 0;
+
+        SEList.Add(StatusEffectType.Shield);
+
     }
 
     public override void Effect(UnitState ally, UnitState enemy, int value)
