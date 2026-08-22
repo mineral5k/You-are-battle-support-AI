@@ -1,6 +1,7 @@
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TooltipPanel : MonoBehaviour
 {
@@ -22,13 +23,16 @@ public class TooltipPanel : MonoBehaviour
 
         manaText.text = $"{skill.fixedManaCost}¸¶³ª";
 
-        Vector3 offset = IsAllyUI ? new Vector3(0f, -100f, 0f) : new Vector3(-150f, 200f, 0f);
+        Vector3 offset = IsAllyUI ? new Vector3(0f, -100f, 0f) : new Vector3(-150f, 100f, 0f);
 
         transform.position = target.position + offset;
 
         gameObject.SetActive(true);
 
         panelManager.Show(skill.SEList);
+        Canvas.ForceUpdateCanvases();
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate( (RectTransform)transform );
     }
 
     public void Show(StatusEffect effect, Transform target)
