@@ -14,6 +14,7 @@ public class HPBarUI : MonoBehaviour
     [SerializeField] private Color inactiveManaColor = new Color(0.3f, 0.4f, 0.5f, 1f);
 
     [SerializeField] private SkillContainer skillContainer;
+    [SerializeField] private SEIconBar iconBar;
     private UnitState unit;
 
     public void Bind(UnitState target)
@@ -27,7 +28,6 @@ public class HPBarUI : MonoBehaviour
 
     public void Refresh()
     {
-        Debug.Log(unit.CurrentMana);
         if (unit == null)
             return;
 
@@ -47,5 +47,6 @@ public class HPBarUI : MonoBehaviour
             manaGems[i].color = i < currentMana ? activeManaColor : inactiveManaColor;
         }
         skillContainer.Refresh();
+        iconBar.Refresh(unit.StatusEffects);
     }
 }

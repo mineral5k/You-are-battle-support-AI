@@ -10,30 +10,43 @@ public class TooltipPanel : MonoBehaviour
     [SerializeField] private TMP_Text manaText;
     [SerializeField] private TMP_Text cooldownText;
     [SerializeField] private TMP_Text descriptionText;
+    [SerializeField] private bool IsAllyUI = true;
 
     public void Show(SkillData skill, Transform target)
     {
-        skillNameText.text =
-            skill.skillName;
+        skillNameText.text = skill.skillName;
 
-        descriptionText.text =
-            skill.skillDescription;
+        descriptionText.text = skill.skillDescription;
 
-        cooldownText.text =
-            $"ÄðÅ¸ÀÓ : {skill.cooltime}ÅÏ";
+        cooldownText.text = $"ÄðÅ¸ÀÓ : {skill.cooltime}ÅÏ";
 
         manaText.text = $"{skill.fixedManaCost}¸¶³ª";
 
-        transform.position = target.position + new Vector3(0f, - 100f, 0f);
+        Vector3 offset = IsAllyUI ? new Vector3(0f, -100f, 0f) : new Vector3(-150f, 200f, 0f);
+
+        transform.position = target.position + offset;
 
         gameObject.SetActive(true);
 
         panelManager.Show(skill.SEList);
     }
 
+    public void Show(StatusEffect effect, Transform target)
+    {
+        skillNameText.text = effect.EffectName;
+        descriptionText.text = effect.EffectDescription;
+        cooldownText.text = effect.Amount.ToString() + " Stack";
+        manaText.text = "";
+        transform.position = target.position + new Vector3(0f, -1f, 0f);
+        gameObject.SetActive(true);
+    }
+
     public void Hide()
     {
         gameObject.SetActive(false);
-        panelManager.Hide();
+        if (panelManager != null)
+        {
+            panelManager.Hide();
+        }
     }
 }

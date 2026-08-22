@@ -136,7 +136,7 @@ public class UnitState
         {
             Effect.OnTurnStart(this);
         }
-
+        OnStatusChanged?.Invoke();
     }
 
     public void OnTurnEnd()
@@ -144,6 +144,10 @@ public class UnitState
         foreach(StatusEffect Effect in statusEffects)
         {
             Effect.ProcessTurnEnd(this);
+            if (Effect.Amount <=0)
+            {
+                Effect.IsExpired = true;
+            }
         }
 
         statusEffects.RemoveAll(effect => effect.IsExpired);

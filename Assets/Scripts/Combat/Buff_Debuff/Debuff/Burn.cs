@@ -4,6 +4,7 @@ public class Burn : StatusEffect
 {
     public override string Id => "Burn";
     public override string EffectName => "화상";
+    public override string EffectDescription => $"턴 종료시 {Amount}의 피해를 입고 수치가 1 감소한다";
     public override bool IsBuff => false;
 
     public Burn(int damage,int duration) : base(damage, duration)
@@ -15,5 +16,6 @@ public class Burn : StatusEffect
     {
         owner.TakeDamage(Amount);
         Debug.Log("화상 피해" + Amount);
+        Amount--;
     }
 }
