@@ -13,6 +13,12 @@ public class HPBarUI : MonoBehaviour
     [SerializeField] private Color activeManaColor = Color.white;
     [SerializeField] private Color inactiveManaColor = new Color(0.3f, 0.4f, 0.5f, 1f);
 
+    [Header("Shield")]
+    [SerializeField] private Image shieldIcon;
+    [SerializeField] private TMP_Text shieldText;
+    [SerializeField] private Color hpColor = Color.red;
+    [SerializeField] private Color shieldColor = Color.skyBlue;
+
     [SerializeField] private SkillContainer skillContainer;
     [SerializeField] private SEIconBar iconBar;
     private UnitState unit;
@@ -30,6 +36,8 @@ public class HPBarUI : MonoBehaviour
     {
         if (unit == null)
             return;
+        hpFill.color = hpColor;
+        shieldIcon.gameObject.SetActive(false);
 
         float hpRatio = unit.maxHp <= 0 ? 0f : (float)unit.CurrentHp / unit.maxHp;
 
@@ -46,6 +54,14 @@ public class HPBarUI : MonoBehaviour
 
             manaGems[i].color = i < currentMana ? activeManaColor : inactiveManaColor;
         }
+
+        if (unit.shield > 0)
+        {
+            hpFill.color = shieldColor;
+            shieldIcon.gameObject.SetActive(true);
+            shieldText.text = unit.shield.ToString();
+        }
+
         skillContainer.Refresh();
         iconBar.Refresh(unit.StatusEffects);
     }
