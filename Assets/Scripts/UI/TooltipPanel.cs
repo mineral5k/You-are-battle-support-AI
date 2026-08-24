@@ -23,7 +23,7 @@ public class TooltipPanel : MonoBehaviour
 
         manaText.text = $"{skill.fixedManaCost}¸¶³ª";
 
-        Vector3 offset = IsAllyUI ? new Vector3(0f, -100f, 0f) : new Vector3(-150f, 100f, 0f);
+        Vector3 offset = IsAllyUI ? new Vector3(0f, -1f, 0f) : new Vector3(-1.50f, 1.00f, 0f);
 
         transform.position = target.position + offset;
 

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SampleSetting : MonoBehaviour
 {
+    [SerializeField] private BattlePresenter battlePresenter;
     public UnitState ally;
     public UnitState enemy;
     public BattleManager bm;
@@ -13,7 +14,7 @@ public class SampleSetting : MonoBehaviour
         enemy = new UnitState();
         allyUi.Bind(ally);
         enemyUi.Bind(enemy);
-        bm = new BattleManager(ally, enemy);
+        bm = new BattleManager(ally, enemy, battlePresenter);
         bm.ProcessBlindTurn();
         bm.ProcessBlindTurn();
         bm.ProcessBlindTurn();

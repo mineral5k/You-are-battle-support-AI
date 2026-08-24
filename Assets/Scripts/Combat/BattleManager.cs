@@ -12,13 +12,13 @@ public class BattleManager
     public List<SkillData> allySkillRecord = new List<SkillData>();
     public List<SkillData> enemySkillRecord = new List<SkillData>();
 
-    public BattleManager(UnitState ally,UnitState enemy)
+    public BattleManager(UnitState ally,UnitState enemy, BattlePresenter battlePresenter)
     {
         this.ally = ally;
         this.enemy = enemy;
         ally.target = enemy;
         enemy.target = ally;
-        turnProcesser = new TurnProcesser(ally, enemy);
+        turnProcesser = new TurnProcesser(ally, enemy, battlePresenter);
         allyStartHP = ally.CurrentHp;
     }
 
