@@ -23,5 +23,10 @@ public class SampleSetting : MonoBehaviour
 
     }
 
+    public void PlayOpenTurn(SkillData skill)
+    {
+        bm.turnProcesser.ProcessOpenTurn(skill);
+    }
+
 
 }

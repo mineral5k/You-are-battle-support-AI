@@ -21,7 +21,8 @@ public class TurnProcesser
     {
         this.ally = ally;
         this.enemy = enemy;
-        this.battlePresenter = battlePresenter; 
+        this.battlePresenter = battlePresenter;
+        this.battlePresenter.Init(this);
     }
 
     public void SelectSkill()
@@ -54,10 +55,25 @@ public class TurnProcesser
         turn++;
     }
 
+    public void EndOpenTurn()
+    {
+        ally.OnTurnEnd();
+        enemy.OnTurnEnd();
+        combatResolver.EndPhase(ally, allyAction, enemy, enemyAction);
+        turn++;
+    }
+
     public void ProcessTurn()
     {
         SelectSkill();
         StartCombat();
+    }
+
+    public void ProcessOpenTurn(SkillData skill)
+    {
+        SelectSkill();
+        allyAction = new SelectedAction(skill, ally.CurrentMana);
+        CreatComands(ally, allyAction, enemy, enemyAction);
     }
 
     public void CreatComands(UnitState ally, SelectedAction allySkill, UnitState enemy, SelectedAction enemySkill)
@@ -161,6 +177,7 @@ public class TurnProcesser
             }
         }
 
+        battlePresenter.StartCoroutine(battlePresenter.PlayCommands(comands));
     }
 
 }

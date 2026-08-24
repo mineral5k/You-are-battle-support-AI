@@ -24,13 +24,18 @@ public class BattleManager
 
     public void ProcessBlindTurn()
     {
-        turnProcesser.StartTurn();
         turnProcesser.ProcessTurn();
         allySkillRecord.Add(turnProcesser.allyAction.skill);
         Debug.Log(turnProcesser.allyAction.skill.skillName);
         enemySkillRecord.Add(turnProcesser.enemyAction.skill);
         Debug.Log(turnProcesser.enemyAction.skill.skillName);
         turnProcesser.EndTurn();
+        turnProcesser.StartTurn();
+    }
+
+    public void ProcessOpenTurn()
+    {
+
     }
 
 }

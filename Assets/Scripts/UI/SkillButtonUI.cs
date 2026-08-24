@@ -9,7 +9,7 @@ public class SkillButtonUI : MonoBehaviour, IPointerEnterHandler,IPointerExitHan
     [SerializeField] private Image skillIcon;
     [SerializeField] private GameObject cooldownOverlay;
     [SerializeField] private TextMeshProUGUI cooldownText;
-
+    [SerializeField] private SampleSetting sampleSetting;
     private SkillData skill;
     private TooltipPanel tooltip;
 
@@ -48,5 +48,10 @@ public class SkillButtonUI : MonoBehaviour, IPointerEnterHandler,IPointerExitHan
     public void OnPointerExit(PointerEventData eventData)
     {
         tooltip.Hide();
+    }
+
+    public void OnClick()
+    {
+        sampleSetting.bm.turnProcesser.ProcessOpenTurn(skill);
     }
 }

@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class BattlePresenter : MonoBehaviour
 {
-    [SerializeField] private CombatResolver resolver;
+    private TurnProcesser turnProcesser;
 
+    public void Init(TurnProcesser turnProcesser)
+    {
+        this.turnProcesser = turnProcesser;
+    }
     public IEnumerator PlayCommands(List<CombatCommand> commands)
     {
         foreach (CombatCommand command in commands)
@@ -33,6 +37,8 @@ public class BattlePresenter : MonoBehaviour
                     break;
             }
         }
+        turnProcesser.EndOpenTurn();
+        turnProcesser.StartTurn();
     }
 
 
@@ -41,7 +47,7 @@ public class BattlePresenter : MonoBehaviour
         // 여기서 나중에
         // SkillPopupUI.Show(...)
         // 등을 실행
-
+        Debug.Log("스킬 보여주기");
         yield return new WaitForSeconds(0.7f);
     }
 
@@ -53,7 +59,7 @@ public class BattlePresenter : MonoBehaviour
         // clashUI.Show(
         //     command.action,
         //     command.opponentAction);
-
+        Debug.Log("클래시 보여주기");
         yield return new WaitForSeconds(1f);
     }
 
@@ -94,6 +100,8 @@ public class BattlePresenter : MonoBehaviour
 
             yield return PlayNonAttackEffect(command.user);
         }
+
+        Debug.Log("스킬 사용");
     }
 
 
