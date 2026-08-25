@@ -12,6 +12,7 @@ public class HPBarUI : MonoBehaviour
     [SerializeField] private Image[] manaGems;
     [SerializeField] private Color activeManaColor = Color.white;
     [SerializeField] private Color inactiveManaColor = new Color(0.3f, 0.4f, 0.5f, 1f);
+    [SerializeField] private Color shineManaColor = Color.red;
 
     [Header("Shield")]
     [SerializeField] private Image shieldIcon;
@@ -27,7 +28,7 @@ public class HPBarUI : MonoBehaviour
     {
         unit = target;
         unit.OnStatusChanged += Refresh;
-        skillContainer.Init(unit);
+        skillContainer.Init(unit,this);
 
         Refresh();
     }
@@ -64,5 +65,24 @@ public class HPBarUI : MonoBehaviour
 
         skillContainer.Refresh();
         iconBar.Refresh(unit.StatusEffects);
+    }
+
+    public void ShineMana(SkillData skill)
+    {
+        if( !skill.CanUse(unit.CurrentMana) )
+        {
+            return;
+        }
+        int RequiredMana = skill.CalculateManaCost(unit.CurrentMana);
+        int currentMana = unit.CurrentMana;
+
+        for (int i =0; i<currentMana; i++)
+        {
+            if (currentMana - RequiredMana <= i)
+            {
+                manaGems[i].color = shineManaColor;
+            }
+        }
+        
     }
 }

@@ -13,11 +13,14 @@ public class SkillButtonUI : MonoBehaviour, IPointerEnterHandler,IPointerExitHan
     private SkillData skill;
     private TooltipPanel tooltip;
 
+    private HPBarUI hpBarUI;
 
-    public void Init(SkillData skill,TooltipPanel tooltip)
+
+    public void Init(SkillData skill,TooltipPanel tooltip,HPBarUI ui)
     {
         this.skill = skill;
         this.tooltip = tooltip;
+        this.hpBarUI = ui;
     }
 
     public void Refresh()
@@ -43,11 +46,13 @@ public class SkillButtonUI : MonoBehaviour, IPointerEnterHandler,IPointerExitHan
     public void OnPointerEnter(PointerEventData eventData)
     {
         tooltip.Show(skill, transform);
+        hpBarUI.ShineMana(skill);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         tooltip.Hide();
+        hpBarUI.Refresh();
     }
 
     public void OnClick()

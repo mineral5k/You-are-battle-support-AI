@@ -9,12 +9,12 @@ public class SkillContainer : MonoBehaviour
     private UnitState unit;
     
     
-    public void Init(UnitState unit)
+    public void Init(UnitState unit,HPBarUI ui)
     {
         this.unit = unit;
         for (int i = 0; i<skillButtons.Count;i++)
         {
-            skillButtons[i].Init(unit.skills[i],tooltip);
+            skillButtons[i].Init(unit.skills[i],tooltip,ui);
         }
     }
 

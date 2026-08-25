@@ -78,6 +78,7 @@ public class UnitState
         int hpDamage = damage - absorbedDamage;
         if (hpDamage > 0) IsDamagedThisTurn = true;
         CurrentHp = Mathf.Max(0, CurrentHp - hpDamage);
+        OnStatusChanged?.Invoke();
 
         return hpDamage;
     }
@@ -95,6 +96,7 @@ public class UnitState
     public void AddShield(int amount)
     {
         shield += Mathf.Max(0, amount);
+        OnStatusChanged?.Invoke();
     }
     public List<SkillData> GetSelectableSkills()
     {
@@ -126,6 +128,8 @@ public class UnitState
         }
 
         statusEffects.Add(newEffect);
+
+        OnStatusChanged?.Invoke();
     }
 
     public void OnTurnStart()
@@ -151,6 +155,8 @@ public class UnitState
         }
 
         statusEffects.RemoveAll(effect => effect.IsExpired);
+        OnStatusChanged?.Invoke();
     }
+
 
 }
