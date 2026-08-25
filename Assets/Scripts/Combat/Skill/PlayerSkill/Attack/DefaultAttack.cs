@@ -5,6 +5,7 @@ public class DefaultAttack : SkillData
 
     public DefaultAttack()
     {
+        skillId = "attack";
         skillName = "기본 공격";
         skillDescription = "적을 5의 위력으로 공격한다";
         category = ActionCategory.Attack;

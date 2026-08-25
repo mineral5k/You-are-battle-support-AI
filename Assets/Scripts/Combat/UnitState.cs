@@ -136,7 +136,7 @@ public class UnitState
     {
         IsDamagedThisTurn = false;
         CurrentMana++;
-        foreach (StatusEffect Effect in statusEffects)
+        foreach (StatusEffect Effect in statusEffects.ToArray())
         {
             Effect.OnTurnStart(this);
         }

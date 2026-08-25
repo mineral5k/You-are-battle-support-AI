@@ -12,9 +12,13 @@ public class AttackUpBattery : StatusEffect
     {
     }
 
-    public override void OnTurnEnd(UnitState owner)
+    public override void OnTurnStart(UnitState owner)
     {
         owner.AddStatusEffect(new AttackUp(amount: 2, duration: 1));
+    }
+
+    public override void OnTurnEnd(UnitState owner)
+    {
         Amount--;
     }
 }

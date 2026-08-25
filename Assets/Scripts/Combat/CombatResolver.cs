@@ -44,8 +44,8 @@ public class CombatResolver
 
     public void AttackPhase(UnitState ally, SelectedAction allyAction, UnitState enemy, SelectedAction enemyAction)
     {
-        int allyFinalValue = allyAction.finalValue + ally.AttackUp;
-        int enemyFinalValue = enemyAction.finalValue + enemy.AttackUp;
+        int allyFinalValue = allyAction.finalValue;
+        int enemyFinalValue = enemyAction.finalValue;
         if (allyAction.skill.category == ActionCategory.Attack && enemyAction.skill.category == ActionCategory.Attack)
         {
             if (allyFinalValue > enemyFinalValue)

@@ -5,10 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class SkillData 
 {
+    public string skillId;
     public string skillName;
     public string skillDescription;
     public ActionCategory category;
     public ManaCostType manaCostType;
+    public Sprite icon => Resources.Load<Sprite>($"SkillIcon/Skill/{skillId}");
 
     public int fixedManaCost;
     public int maxManaCost;

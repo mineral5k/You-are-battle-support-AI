@@ -29,12 +29,12 @@ public class TurnProcesser
     {
         ally.Selectableskills = ally.GetSelectableSkills();
         enemy.Selectableskills = enemy.GetSelectableSkills();
-        SkillData allySkill = ally.Selectableskills[Random.Range(0, ally.Selectableskills.Count - 1)];
-        SkillData enemySkill = enemy.Selectableskills[Random.Range(0, enemy.Selectableskills.Count - 1)];
+        SkillData allySkill = ally.Selectableskills[Random.Range(0, ally.Selectableskills.Count)];
+        SkillData enemySkill = enemy.Selectableskills[Random.Range(0, enemy.Selectableskills.Count)];
         allySkillRecord.Insert(turn, allySkill);
         enemySkillRecord.Insert(turn, enemySkill);
-        allyAction = new SelectedAction(allySkill,ally.CurrentMana);
-        enemyAction = new SelectedAction(enemySkill, enemy.CurrentMana);
+        allyAction = new SelectedAction(allySkill,ally);
+        enemyAction = new SelectedAction(enemySkill, enemy);
     }
 
     public void StartTurn()
@@ -72,7 +72,7 @@ public class TurnProcesser
     public void ProcessOpenTurn(SkillData skill)
     {
         SelectSkill();
-        allyAction = new SelectedAction(skill, ally.CurrentMana);
+        allyAction = new SelectedAction(skill, ally);
         CreatComands(ally, allyAction, enemy, enemyAction);
     }
 
@@ -147,8 +147,8 @@ public class TurnProcesser
                 enemyAction = enemySkill
             });
 
-            int allyFinalValue = allySkill.finalValue + ally.AttackUp;
-            int enemyFinalValue = enemySkill.finalValue + enemy.AttackUp;
+            int allyFinalValue = allySkill.finalValue;
+            int enemyFinalValue = enemySkill.finalValue;
 
             if (allyFinalValue > enemyFinalValue)
             {

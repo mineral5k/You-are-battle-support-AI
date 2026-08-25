@@ -5,6 +5,7 @@ public class DefaultDeffense : SkillData
     
     public DefaultDeffense()
     {
+        skillId = "deffense";
         skillName = "기본 방어";
         skillDescription = "5의 방어도를 얻는다.";
         category = ActionCategory.Defense;

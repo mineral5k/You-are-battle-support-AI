@@ -21,6 +21,7 @@ public class SkillButtonUI : MonoBehaviour, IPointerEnterHandler,IPointerExitHan
         this.skill = skill;
         this.tooltip = tooltip;
         this.hpBarUI = ui;
+        skillIcon.sprite = skill.icon;
     }
 
     public void Refresh()

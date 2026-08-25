@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class HPBarUI : MonoBehaviour
 {
+    [SerializeField] private bool IsAlly = true;
+
     [Header("HP")]
     [SerializeField] private Image hpFill;
     [SerializeField] private TMP_Text hpText;
@@ -69,7 +71,7 @@ public class HPBarUI : MonoBehaviour
 
     public void ShineMana(SkillData skill)
     {
-        if( !skill.CanUse(unit.CurrentMana) )
+        if( !skill.CanUse(unit.CurrentMana) || !IsAlly )
         {
             return;
         }
