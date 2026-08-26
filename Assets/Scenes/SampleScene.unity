@@ -594,7 +594,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &102691709
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4458,7 +4458,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &977906292
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5485,6 +5485,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de827dd4127486543bd08ad360f680dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattlePresenter
+  allyPanel: {fileID: 977906295}
+  allyPanelTransform: {fileID: 977906292}
+  enemyPanel: {fileID: 1623706771}
+  enemyPanelTransform: {fileID: 1623706768}
+  VS: {fileID: 102691708}
 --- !u!224 &1224021420 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3417827743302422005, guid: 0c72d5125564a774db1f131834119f58, type: 3}
@@ -6856,7 +6861,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1623706768
 RectTransform:
   m_ObjectHideFlags: 0

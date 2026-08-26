@@ -18,4 +18,6 @@ public class CombatCommand
 
     // 공격 VS 공격 표시용
     public SelectedAction enemyAction;
+
+    public bool isAlly;
 }

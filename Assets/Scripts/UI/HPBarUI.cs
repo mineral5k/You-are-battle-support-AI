@@ -60,7 +60,7 @@ public class HPBarUI : MonoBehaviour
 
         if (unit.shield > 0)
         {
-            hpFill.color = shieldColor;
+            //hpFill.color = shieldColor;
             shieldIcon.gameObject.SetActive(true);
             shieldText.text = unit.shield.ToString();
         }

@@ -1,10 +1,26 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class BattlePresenter : MonoBehaviour
 {
     private TurnProcesser turnProcesser;
+
+    [SerializeField] private SkillRevealPanel allyPanel;
+    [SerializeField] private RectTransform allyPanelTransform;
+    [SerializeField] private SkillRevealPanel enemyPanel;
+    [SerializeField] private RectTransform enemyPanelTransform;
+    [SerializeField] private GameObject VS;
+
+    private Vector2 allyPanelPos;
+    private Vector2 enemyPanelPos;
+
+    
+
+    Vector3 normalScale = new Vector3(0.5f, 0.5f, 1f);
 
     public void Init(TurnProcesser turnProcesser)
     {
@@ -12,6 +28,9 @@ public class BattlePresenter : MonoBehaviour
     }
     public IEnumerator PlayCommands(List<CombatCommand> commands)
     {
+        allyPanelPos = allyPanelTransform.anchoredPosition;
+        enemyPanelPos = enemyPanelTransform.anchoredPosition;
+
         foreach (CombatCommand command in commands)
         {
             switch (command.type)
@@ -37,6 +56,12 @@ public class BattlePresenter : MonoBehaviour
                     break;
             }
         }
+
+        allyPanel.HidePanel();
+        enemyPanel.HidePanel();
+        enemyPanelTransform.anchoredPosition = enemyPanelPos;
+        allyPanelTransform.anchoredPosition = allyPanelPos;
+        VS.SetActive(false);
         turnProcesser.EndOpenTurn();
         turnProcesser.StartTurn();
     }
@@ -44,22 +69,59 @@ public class BattlePresenter : MonoBehaviour
 
     private IEnumerator ShowSkill(CombatCommand command)
     {
-        // 여기서 나중에
-        // SkillPopupUI.Show(...)
-        // 등을 실행
+        allyPanel.SetSkill(command.allyAction);
+        enemyPanel.SetSkill(command.enemyAction);
+        VS.SetActive(true);
+
+        allyPanel.transform.localScale = Vector3.one * 0.3f;
+        allyPanel.gameObject.SetActive(true);
+        allyPanel.transform.DOScale(normalScale, 0.2f).SetEase(Ease.OutBack);
+
+        enemyPanel.transform.localScale = Vector3.one * 0.3f;
+        enemyPanel.gameObject.SetActive(true);
+        enemyPanel.transform.DOScale(normalScale, 0.2f).SetEase(Ease.OutBack);
+
         Debug.Log("스킬 보여주기");
         yield return new WaitForSeconds(0.7f);
     }
+    
+
 
 
     private IEnumerator ShowClash(CombatCommand command)
     {
-        // 나중에
-        //
-        // clashUI.Show(
-        //     command.action,
-        //     command.opponentAction);
-        Debug.Log("클래시 보여주기");
+        bool isAllyWon = command.allyAction.finalValue > command.enemyAction.finalValue;
+        bool isEnemyWon = command.enemyAction.finalValue > command.allyAction.finalValue;
+
+
+        VS.SetActive(false);
+        DG.Tweening.Sequence sequence = DOTween.Sequence();
+
+        sequence.Append(allyPanelTransform.DOAnchorPosX(470f, 0.25f).SetEase(Ease.InCubic));
+        sequence.Join(enemyPanelTransform.DOAnchorPosX(-450f, 0.25f).SetEase(Ease.InCubic));
+
+        sequence.Append(allyPanelTransform.DOPunchScale(new Vector3(0.08f, 0.08f, 0f), 0.12f, 1, 0.3f));
+        sequence.Join(enemyPanelTransform.DOPunchScale(new Vector3(0.08f, 0.08f, 0f), 0.12f, 1, 0.3f));
+
+        sequence.AppendCallback(() =>
+        {
+            if (isAllyWon)
+            {
+                allyPanel.WinnerReaction(allyPanelPos,-1f);
+                enemyPanel.BreakPanel(enemyPanelPos);
+            }
+            else if (isEnemyWon) 
+            {
+                enemyPanel.WinnerReaction(enemyPanelPos,1f);
+                allyPanel.BreakPanel(allyPanelPos);
+            }
+            else
+            {
+                allyPanel.BreakPanel(allyPanelPos);
+                enemyPanel.BreakPanel(enemyPanelPos);
+                
+            }
+        });
         yield return new WaitForSeconds(1f);
     }
 
@@ -67,7 +129,8 @@ public class BattlePresenter : MonoBehaviour
     private IEnumerator ExecuteSkill(CombatCommand command)
     {
         bool isAttack = command.allyAction.skill.category == ActionCategory.Attack;
-
+        SkillRevealPanel panel = command.isAlly ? allyPanel : enemyPanel;
+        panel.transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0f), 0.2f, 1, 0.5f);
 
         if (isAttack)
         {
@@ -81,8 +144,7 @@ public class BattlePresenter : MonoBehaviour
             // -------------------------
             // 실제 공격 적용
             // -------------------------
-
-            // resolver.ExecuteCommand(command);
+            command.allyAction.skill.Effect(command.user, command.target, command.allyAction.finalValue);
 
 
             // -------------------------
@@ -95,8 +157,7 @@ public class BattlePresenter : MonoBehaviour
         {
             // 방어 / 충전 등은
             // 여기서 실제 효과 적용
-
-            //resolver.ExecuteCommand(command);
+            command.allyAction.skill.Effect(command.user, command.target, command.allyAction.finalValue);
 
             yield return PlayNonAttackEffect(command.user);
         }

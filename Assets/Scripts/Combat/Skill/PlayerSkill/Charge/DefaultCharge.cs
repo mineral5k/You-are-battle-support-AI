@@ -7,7 +7,7 @@ public class DefaultCharge : SkillData
         skillId = "charge";
         skillName = "기본 충전";
         skillDescription = "마나를 2 얻는다.";
-        category = ActionCategory.Attack;
+        category = ActionCategory.Charge;
 
         manaCostType = ManaCostType.Fixed;
 

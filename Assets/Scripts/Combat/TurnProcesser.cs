@@ -98,7 +98,8 @@ public class TurnProcesser
                 user = ally,
                 target = enemy,
                 allyAction = allySkill,
-                enemyAction = enemySkill
+                enemyAction = enemySkill,
+                isAlly = true
             });
 
             comands.Add(
@@ -108,7 +109,8 @@ public class TurnProcesser
                 user = enemy,
                 target = ally,
                 allyAction = enemySkill,
-                enemyAction = allySkill
+                enemyAction = allySkill,
+                isAlly = false
             });
         }
 
@@ -121,7 +123,8 @@ public class TurnProcesser
                 user = enemy,
                 target = ally,
                 allyAction = enemySkill,
-                enemyAction = allySkill
+                enemyAction = allySkill,
+                isAlly = false
             });
 
             comands.Add(
@@ -131,7 +134,8 @@ public class TurnProcesser
                 user = ally,
                 target = enemy,
                 allyAction = allySkill,
-                enemyAction = enemySkill
+                enemyAction = enemySkill,
+                isAlly = true
             });
         }
 
@@ -159,7 +163,8 @@ public class TurnProcesser
                         user = ally,
                         target = enemy,
                         allyAction = allySkill,
-                        enemyAction = enemySkill
+                        enemyAction = enemySkill,
+                        isAlly = true
                     });
             }
 
@@ -172,7 +177,8 @@ public class TurnProcesser
                         user = enemy,
                         target = ally,
                         allyAction = enemySkill,
-                        enemyAction = allySkill
+                        enemyAction = allySkill,
+                        isAlly = false
                     });
             }
         }
