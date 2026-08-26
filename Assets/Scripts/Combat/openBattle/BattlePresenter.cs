@@ -15,6 +15,9 @@ public class BattlePresenter : MonoBehaviour
     [SerializeField] private RectTransform enemyPanelTransform;
     [SerializeField] private GameObject VS;
 
+    [SerializeField] private Animator allyAnim;
+    [SerializeField] private Animator enemyAnim;
+
     private Vector2 allyPanelPos;
     private Vector2 enemyPanelPos;
 
@@ -71,6 +74,8 @@ public class BattlePresenter : MonoBehaviour
     {
         allyPanel.SetSkill(command.allyAction);
         enemyPanel.SetSkill(command.enemyAction);
+        command.user.anim = allyAnim;
+        command.target.anim = enemyAnim;
         VS.SetActive(true);
 
         allyPanel.transform.localScale = Vector3.one * 0.3f;
@@ -168,24 +173,22 @@ public class BattlePresenter : MonoBehaviour
 
     private IEnumerator PlayAttackAnimation(UnitState unit)
     {
-        Debug.Log("공격 애니메이션");
-
+        unit.anim.SetTrigger("Attack");
         yield return new WaitForSeconds(0.5f);
     }
 
 
     private IEnumerator PlayHitAnimation(UnitState unit)
     {
-        Debug.Log("피격 연출");
-
-        yield return new WaitForSeconds(0.3f);
+        unit.anim.SetTrigger("Hurt");
+        yield return new WaitForSeconds(0.5f);
     }
 
 
     private IEnumerator PlayNonAttackEffect(UnitState unit)
     {
-        Debug.Log("방어 / 버프 연출");
-
-        yield return new WaitForSeconds(0.4f);
+        unit.anim.SetBool("Defense", true);
+        yield return new WaitForSeconds(0.7f);
+        unit.anim.SetBool("Defense", false);
     }
 }

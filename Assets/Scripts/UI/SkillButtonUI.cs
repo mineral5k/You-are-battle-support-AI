@@ -58,6 +58,9 @@ public class SkillButtonUI : MonoBehaviour, IPointerEnterHandler,IPointerExitHan
 
     public void OnClick()
     {
-        sampleSetting.bm.turnProcesser.ProcessOpenTurn(skill);
+        if (skill.CanUse(sampleSetting.ally.CurrentMana))
+        {
+            sampleSetting.bm.turnProcesser.ProcessOpenTurn(skill);
+        }
     }
 }

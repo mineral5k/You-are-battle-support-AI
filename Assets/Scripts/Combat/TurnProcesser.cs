@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +14,8 @@ public class TurnProcesser
     public List<SkillData> enemySkillRecord = new List<SkillData>();
     public BattlePresenter battlePresenter;
     public List<CombatCommand> comands = new List<CombatCommand>();
-
+    public bool isProcessing = false;
+    public Action turnPanelRefresh;
 
     public int turn = 0;
 
@@ -29,18 +31,34 @@ public class TurnProcesser
     {
         ally.Selectableskills = ally.GetSelectableSkills();
         enemy.Selectableskills = enemy.GetSelectableSkills();
-        SkillData allySkill = ally.Selectableskills[Random.Range(0, ally.Selectableskills.Count)];
-        SkillData enemySkill = enemy.Selectableskills[Random.Range(0, enemy.Selectableskills.Count)];
-        allySkillRecord.Insert(turn, allySkill);
-        enemySkillRecord.Insert(turn, enemySkill);
+        SkillData allySkill;
+        SkillData enemySkill;
+        while (true)
+        {
+            allySkill = ally.Selectableskills[UnityEngine.Random.Range(0, ally.Selectableskills.Count)];
+            if ( !(allySkill.category == ActionCategory.Charge && ally.CurrentMana >= 9) ) break;
+        }
+
+        while (true)
+        {
+            enemySkill = enemy.Selectableskills[UnityEngine.Random.Range(0, enemy.Selectableskills.Count)];
+            if (!(enemySkill.category == ActionCategory.Charge && enemy.CurrentMana >= 9)) break;
+        }
+
+        allySkillRecord.Add(allySkill);
+        enemySkillRecord.Add(enemySkill);
         allyAction = new SelectedAction(allySkill,ally);
         enemyAction = new SelectedAction(enemySkill, enemy);
     }
 
     public void StartTurn()
     {
+        turn++;
         ally.OnTurnStart();
         enemy.OnTurnStart();
+        isProcessing = false;
+        turnPanelRefresh?.Invoke();
+        Debug.Log($"{turn}ео");
     }
 
     public void StartCombat()
@@ -52,7 +70,6 @@ public class TurnProcesser
     {
         ally.OnTurnEnd();
         enemy.OnTurnEnd();
-        turn++;
     }
 
     public void EndOpenTurn()
@@ -60,7 +77,6 @@ public class TurnProcesser
         ally.OnTurnEnd();
         enemy.OnTurnEnd();
         combatResolver.EndPhase(ally, allyAction, enemy, enemyAction);
-        turn++;
     }
 
     public void ProcessTurn()
@@ -71,8 +87,13 @@ public class TurnProcesser
 
     public void ProcessOpenTurn(SkillData skill)
     {
+        if (isProcessing) return;
+
+        isProcessing = true;
         SelectSkill();
         allyAction = new SelectedAction(skill, ally);
+        ally.SpendMana(allyAction.spentMana);
+        enemy.SpendMana(enemyAction.spentMana);
         CreatComands(ally, allyAction, enemy, enemyAction);
     }
 

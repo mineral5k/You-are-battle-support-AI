@@ -46,6 +46,8 @@ public class UnitState
     public List <StatusEffect> StatusEffects => statusEffects;
     public bool IsDamagedThisTurn = false;
 
+    public Animator anim;
+
     public int AttackUp
     {
         get
