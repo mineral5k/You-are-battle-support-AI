@@ -68,11 +68,11 @@ public class BattlePresenter : MonoBehaviour
         enemyPanelTransform.anchoredPosition = enemyPanelPos;
         allyPanelTransform.anchoredPosition = allyPanelPos;
         VS.SetActive(false);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.4f);
         turnProcesser.EndOpenTurn(allyAction,enemyAction);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
         turnProcesser.StartTurn();
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
     }
 
     public IEnumerator ReplayBlindTurns()
@@ -80,9 +80,7 @@ public class BattlePresenter : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             SelectedAction allyAction = new SelectedAction(turnProcesser.allySkillRecord[i],turnProcesser.ally);
-            turnProcesser.allyAction = allyAction;
             SelectedAction enemyAction = new SelectedAction(turnProcesser.enemySkillRecord[i], turnProcesser.enemy);
-            turnProcesser.enemyAction = enemyAction;
             List<CombatCommand> commands = turnProcesser.CreatComands(allyAction, enemyAction);
             yield return PlayCommands(commands);
         }
