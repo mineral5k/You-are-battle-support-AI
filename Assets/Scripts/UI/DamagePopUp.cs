@@ -18,6 +18,7 @@ public class DamagePopUp : MonoBehaviour
     public void PopUp(string damage)
     {
         damageText.text = damage;
+        gameObject.SetActive(true);
         Vector2 launchDirection = new Vector2(launchForceX, launchForceY);
         rb.AddForce(launchDirection, ForceMode2D.Impulse);
         StartCoroutine(PopUpCoroutine());
@@ -25,7 +26,7 @@ public class DamagePopUp : MonoBehaviour
 
     IEnumerator PopUpCoroutine()
     {
-        yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(1f);
+        gameObject.SetActive(false);
     }
 }

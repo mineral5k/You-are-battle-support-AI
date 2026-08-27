@@ -47,6 +47,7 @@ public class UnitState
     public bool IsDamagedThisTurn = false;
 
     public Animator anim;
+    public DamagePopUpPool pool;
 
     public int AttackUp
     {
@@ -78,7 +79,16 @@ public class UnitState
         shield -= absorbedDamage;
 
         int hpDamage = damage - absorbedDamage;
-        if (hpDamage > 0) IsDamagedThisTurn = true;
+        if (hpDamage > 0)
+        {
+            IsDamagedThisTurn = true;
+            if (anim != null)
+            {
+                DamagePopUp damagePopUp = pool.GetPopUp();
+                damagePopUp.transform.position = anim.transform.position + new Vector3 (1.5f,1f,0);
+                damagePopUp.PopUp(hpDamage.ToString());
+            }
+        }
         CurrentHp = Mathf.Max(0, CurrentHp - hpDamage);
         OnStatusChanged?.Invoke();
 

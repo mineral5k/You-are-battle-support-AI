@@ -10,12 +10,15 @@ public class SampleSetting : MonoBehaviour
     public HPBarUI allyUi;
     public HPBarUI enemyUi;
     public TMP_Text turnText;
+    public DamagePopUpPool damagePopUpPool;
     void Start()
     {
         ally = new UnitState();
         enemy = new UnitState();
         allyUi.Bind(ally);
         enemyUi.Bind(enemy);
+        ally.pool = damagePopUpPool;
+        enemy.pool = damagePopUpPool;
         bm = new BattleManager(ally, enemy, battlePresenter);
         bm.turnProcesser.turnPanelRefresh += TurnTextRefresh;
         bm.turnProcesser.StartTurn();
