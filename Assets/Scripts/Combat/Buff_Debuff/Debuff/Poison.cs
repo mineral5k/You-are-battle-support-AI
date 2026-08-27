@@ -20,7 +20,7 @@ public class Poison : StatusEffect
 
     public override void OnTurnEnd(UnitState owner)
     {
-        owner.TakeDamage(Amount);
+        owner.bookedDamage += Amount;
     }
 
 }

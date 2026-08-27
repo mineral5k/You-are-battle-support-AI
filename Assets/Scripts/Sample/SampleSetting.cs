@@ -34,6 +34,20 @@ public class SampleSetting : MonoBehaviour
         bm.turnProcesser.ProcessOpenTurn(skill);
     }
 
+    public void ReplayBlindTurns()
+    {
+        ResetConditions();
+        battlePresenter.StartCoroutine(battlePresenter.ReplayBlindTurns());
+    }
+
+    public void ResetConditions()
+    {
+        ally.ResetCondition();
+        enemy.ResetCondition();
+        bm.turnProcesser.turn = 0;
+        bm.turnProcesser.StartTurn();
+    }
+
     public void TurnTextRefresh()
     {
         turnText.text = $"Turn {bm.turnProcesser.turn}";

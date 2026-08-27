@@ -14,6 +14,9 @@ public class CombatResolver
 
         AttackPhase(ally, allyAction,enemy, enemyAction);
 
+        ally.OnTurnEnd();
+        enemy.OnTurnEnd();
+
         EndPhase(ally,allyAction, enemy,enemyAction);
     }
 

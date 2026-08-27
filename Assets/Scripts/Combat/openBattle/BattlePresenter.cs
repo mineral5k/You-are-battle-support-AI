@@ -18,6 +18,9 @@ public class BattlePresenter : MonoBehaviour
     [SerializeField] private Animator allyAnim;
     [SerializeField] private Animator enemyAnim;
 
+    private SelectedAction allyAction;
+    private SelectedAction enemyAction;
+
     private Vector2 allyPanelPos;
     private Vector2 enemyPanelPos;
 
@@ -65,8 +68,24 @@ public class BattlePresenter : MonoBehaviour
         enemyPanelTransform.anchoredPosition = enemyPanelPos;
         allyPanelTransform.anchoredPosition = allyPanelPos;
         VS.SetActive(false);
-        turnProcesser.EndOpenTurn();
+        yield return new WaitForSeconds(0.2f);
+        turnProcesser.EndOpenTurn(allyAction,enemyAction);
+        yield return new WaitForSeconds(0.1f);
         turnProcesser.StartTurn();
+        yield return new WaitForSeconds(0.1f);
+    }
+
+    public IEnumerator ReplayBlindTurns()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            SelectedAction allyAction = new SelectedAction(turnProcesser.allySkillRecord[i],turnProcesser.ally);
+            turnProcesser.allyAction = allyAction;
+            SelectedAction enemyAction = new SelectedAction(turnProcesser.enemySkillRecord[i], turnProcesser.enemy);
+            turnProcesser.enemyAction = enemyAction;
+            List<CombatCommand> commands = turnProcesser.CreatComands(allyAction, enemyAction);
+            yield return PlayCommands(commands);
+        }
     }
 
 
@@ -74,6 +93,8 @@ public class BattlePresenter : MonoBehaviour
     {
         allyPanel.SetSkill(command.allyAction);
         enemyPanel.SetSkill(command.enemyAction);
+        allyAction = command.allyAction;
+        enemyAction = command.enemyAction;
         command.user.anim = allyAnim;
         command.target.anim = enemyAnim;
         VS.SetActive(true);
@@ -139,35 +160,19 @@ public class BattlePresenter : MonoBehaviour
 
         if (isAttack)
         {
-            // -------------------------
-            // 공격 준비 애니메이션
-            // -------------------------
-
             yield return PlayAttackAnimation(command.user);
 
-
-            // -------------------------
-            // 실제 공격 적용
-            // -------------------------
             command.allyAction.skill.Effect(command.user, command.target, command.allyAction.finalValue);
-
-
-            // -------------------------
-            // 피격 연출
-            // -------------------------
 
             yield return PlayHitAnimation(command.target);
         }
         else
         {
-            // 방어 / 충전 등은
-            // 여기서 실제 효과 적용
             command.allyAction.skill.Effect(command.user, command.target, command.allyAction.finalValue);
 
             yield return PlayNonAttackEffect(command.user);
         }
 
-        Debug.Log("스킬 사용");
     }
 
 
@@ -180,8 +185,7 @@ public class BattlePresenter : MonoBehaviour
 
     private IEnumerator PlayHitAnimation(UnitState unit)
     {
-        unit.anim.SetTrigger("Hurt");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.2f);
     }
 
 

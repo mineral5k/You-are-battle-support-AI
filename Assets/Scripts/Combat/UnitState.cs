@@ -45,6 +45,7 @@ public class UnitState
     private List<StatusEffect> statusEffects = new List<StatusEffect>();
     public List <StatusEffect> StatusEffects => statusEffects;
     public bool IsDamagedThisTurn = false;
+    public int bookedDamage = 0;
 
     public Animator anim;
     public DamagePopUpPool pool;
@@ -87,6 +88,7 @@ public class UnitState
                 DamagePopUp damagePopUp = pool.GetPopUp();
                 damagePopUp.transform.position = anim.transform.position + new Vector3 (1.5f,1f,0);
                 damagePopUp.PopUp(hpDamage.ToString());
+                anim.SetTrigger("Hurt");
             }
         }
         CurrentHp = Mathf.Max(0, CurrentHp - hpDamage);
@@ -168,6 +170,19 @@ public class UnitState
 
         statusEffects.RemoveAll(effect => effect.IsExpired);
         OnStatusChanged?.Invoke();
+        TakeDamage(bookedDamage);
+        bookedDamage = 0;
+    }
+
+    public void ResetCondition()
+    {
+        currentHp = maxHp;
+        StatusEffects.Clear();
+        currentMana = 2;
+        foreach(SkillData skill in skills)
+        {
+            skill.currentCooldown = 0;
+        }
     }
 
 

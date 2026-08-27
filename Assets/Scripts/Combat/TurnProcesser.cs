@@ -13,7 +13,7 @@ public class TurnProcesser
     public List<SkillData> allySkillRecord = new List<SkillData>();
     public List<SkillData> enemySkillRecord = new List<SkillData>();
     public BattlePresenter battlePresenter;
-    public List<CombatCommand> comands = new List<CombatCommand>();
+    public List<CombatCommand> commands = new List<CombatCommand>();
     public bool isProcessing = false;
     public Action turnPanelRefresh;
 
@@ -46,6 +46,7 @@ public class TurnProcesser
         }
 
         allySkillRecord.Add(allySkill);
+        Debug.Log(allySkill.skillId);
         enemySkillRecord.Add(enemySkill);
         allyAction = new SelectedAction(allySkill,ally);
         enemyAction = new SelectedAction(enemySkill, enemy);
@@ -58,7 +59,6 @@ public class TurnProcesser
         enemy.OnTurnStart();
         isProcessing = false;
         turnPanelRefresh?.Invoke();
-        Debug.Log($"{turn}ео");
     }
 
     public void StartCombat()
@@ -68,11 +68,10 @@ public class TurnProcesser
 
     public void EndTurn()
     {
-        ally.OnTurnEnd();
-        enemy.OnTurnEnd();
+        
     }
 
-    public void EndOpenTurn()
+    public void EndOpenTurn(SelectedAction allyAction, SelectedAction enemyAction)
     {
         ally.OnTurnEnd();
         enemy.OnTurnEnd();
@@ -92,15 +91,17 @@ public class TurnProcesser
         isProcessing = true;
         SelectSkill();
         allyAction = new SelectedAction(skill, ally);
-        ally.SpendMana(allyAction.spentMana);
-        enemy.SpendMana(enemyAction.spentMana);
-        CreatComands(ally, allyAction, enemy, enemyAction);
+        
+        CreatComands(allyAction, enemyAction);
+        battlePresenter.StartCoroutine(battlePresenter.PlayCommands(commands));
     }
 
-    public void CreatComands(UnitState ally, SelectedAction allySkill, UnitState enemy, SelectedAction enemySkill)
+    public List<CombatCommand> CreatComands(SelectedAction allySkill, SelectedAction enemySkill)
     {
-        comands.Clear();
-        comands.Add(
+        ally.SpendMana(allySkill.spentMana);
+        enemy.SpendMana(enemySkill.spentMana);
+        commands.Clear();
+        commands.Add(
             new CombatCommand
             {
                 type = CombatCommandType.RevealSkill,
@@ -112,7 +113,7 @@ public class TurnProcesser
 
         if (allySkill.skill.category != ActionCategory.Attack)
         {
-            comands.Add(
+            commands.Add(
             new CombatCommand
             {
                 type = CombatCommandType.ExecuteSkill,
@@ -123,7 +124,7 @@ public class TurnProcesser
                 isAlly = true
             });
 
-            comands.Add(
+            commands.Add(
             new CombatCommand
             {
                 type = CombatCommandType.ExecuteSkill,
@@ -137,7 +138,7 @@ public class TurnProcesser
 
         else if (enemySkill.skill.category != ActionCategory.Attack)
         {
-            comands.Add(
+            commands.Add(
             new CombatCommand
             {
                 type = CombatCommandType.ExecuteSkill,
@@ -148,7 +149,7 @@ public class TurnProcesser
                 isAlly = false
             });
 
-            comands.Add(
+            commands.Add(
             new CombatCommand
             {
                 type = CombatCommandType.ExecuteSkill,
@@ -162,7 +163,7 @@ public class TurnProcesser
 
         else if (enemySkill.skill.category == ActionCategory.Attack)
         {
-            comands.Add(
+            commands.Add(
             new CombatCommand
             {
                 type = CombatCommandType.RevealClash,
@@ -177,7 +178,7 @@ public class TurnProcesser
 
             if (allyFinalValue > enemyFinalValue)
             {
-                comands.Add(
+                commands.Add(
                     new CombatCommand
                     {
                         type = CombatCommandType.ExecuteSkill,
@@ -191,7 +192,7 @@ public class TurnProcesser
 
             else if (allyFinalValue < enemyFinalValue)
             {
-                comands.Add(
+                commands.Add(
                     new CombatCommand
                     {
                         type = CombatCommandType.ExecuteSkill,
@@ -204,7 +205,7 @@ public class TurnProcesser
             }
         }
 
-        battlePresenter.StartCoroutine(battlePresenter.PlayCommands(comands));
+        return commands;
     }
 
 }
