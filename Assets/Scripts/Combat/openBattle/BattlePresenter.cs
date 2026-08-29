@@ -79,6 +79,7 @@ public class BattlePresenter : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
+            turnProcesser.GetSelectedBuff();
             SelectedAction allyAction = new SelectedAction(turnProcesser.allySkillRecord[i],turnProcesser.ally);
             SelectedAction enemyAction = new SelectedAction(turnProcesser.enemySkillRecord[i], turnProcesser.enemy);
             List<CombatCommand> commands = turnProcesser.CreatComands(allyAction, enemyAction);

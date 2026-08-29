@@ -3,6 +3,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum selectedBuff
+{
+    None,
+    AttackUp,
+    GainShield
+}
+
 public class TurnProcesser
 {
     public UnitState ally;
@@ -18,6 +25,7 @@ public class TurnProcesser
     public Action turnPanelRefresh;
 
     public int turn = 0;
+    public List<selectedBuff> selectedBuffs = new List<selectedBuff> { selectedBuff.AttackUp, selectedBuff.GainShield, selectedBuff.None, selectedBuff.None, selectedBuff.None, };
 
     public TurnProcesser(UnitState ally, UnitState enemy, BattlePresenter battlePresenter)
     {
@@ -94,6 +102,23 @@ public class TurnProcesser
         
         CreatComands(allyAction, enemyAction);
         battlePresenter.StartCoroutine(battlePresenter.PlayCommands(commands));
+    }
+
+    public void GetSelectedBuff()
+    {
+        switch(selectedBuffs[turn-1])
+        {
+            case selectedBuff.AttackUp:
+                ally.AddStatusEffect(new AttackUp(4, 1));
+                break;
+
+            case selectedBuff.GainShield:
+                ally.AddShield(10);
+                break;
+
+            default:
+                break;
+        }
     }
 
     public List<CombatCommand> CreatComands(SelectedAction allySkill, SelectedAction enemySkill)

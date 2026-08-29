@@ -1,0 +1,248 @@
+fileFormatVersion: 2
+guid: 35a74a957b7d398478ce699c592a3484
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7125863041227169821
+    second: Small_Panel_purple_0
+  - first:
+      213: -6029042630735057427
+    second: Small_Panel_purple_1
+  - first:
+      213: 8927783270803405545
+    second: Small_Panel_purple_2
+  - first:
+      213: -1969101657710113400
+    second: Small_Panel_purple_3
+  - first:
+      213: -9031754797591976264
+    second: Small_Panel_purple_4
+  - first:
+      213: 6144160895268603088
+    second: Small_Panel_purple_5
+  - first:
+      213: 4652760119096739353
+    second: Small_Panel_purple_6
+  - first:
+      213: 7056715032721452316
+    second: Small_Panel_purple_7
+  - first:
+      213: 5055342273044891546
+    second: Small_Panel_purple_8
+  - first:
+      213: 711885732647802277
+    second: Small_Panel_purple_9
+  - first:
+      213: -123187233133592013
+    second: Small_Panel_purple_10
+  - first:
+      213: -6026375570415407389
+    second: Small_Panel_purple_11
+  - first:
+      213: 1399478727249994487
+    second: Small_Panel_purple_12
+  - first:
+      213: 7301806781756934261
+    second: Small_Panel_purple_13
+  - first:
+      213: -8972091041805488545
+    second: Small_Panel_purple_14
+  - first:
+      213: 2338467169663283911
+    second: Small_Panel_purple_15
+  - first:
+      213: -2176894074123764856
+    second: Small_Panel_purple_16
+  - first:
+      213: 7104018125779442253
+    second: Small_Panel_purple_17
+  - first:
+      213: -2309045984239390516
+    second: Small_Panel_purple_18
+  - first:
+      213: 5498836250565210931
+    second: Small_Panel_purple_19
+  - first:
+      213: -3187592451209678486
+    second: Small_Panel_purple_20
+  - first:
+      213: 4853706987049391216
+    second: Small_Panel_purple_21
+  - first:
+      213: -4211208058784816367
+    second: Small_Panel_purple_22
+  - first:
+      213: -4048271166704032265
+    second: Small_Panel_purple_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Small_Panel_purple_0
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 164
+        width: 935
+        height: 963
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d102e6a7ea624e260800000000000000
+      internalID: 7125863041227169821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 86da962ca344f254589fcf06c675829a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Small_Panel_purple_0: 7125863041227169821
+      Small_Panel_purple_1: -6029042630735057427
+      Small_Panel_purple_10: -123187233133592013
+      Small_Panel_purple_11: -6026375570415407389
+      Small_Panel_purple_12: 1399478727249994487
+      Small_Panel_purple_13: 7301806781756934261
+      Small_Panel_purple_14: -8972091041805488545
+      Small_Panel_purple_15: 2338467169663283911
+      Small_Panel_purple_16: -2176894074123764856
+      Small_Panel_purple_17: 7104018125779442253
+      Small_Panel_purple_18: -2309045984239390516
+      Small_Panel_purple_19: 5498836250565210931
+      Small_Panel_purple_2: 8927783270803405545
+      Small_Panel_purple_20: -3187592451209678486
+      Small_Panel_purple_21: 4853706987049391216
+      Small_Panel_purple_22: -4211208058784816367
+      Small_Panel_purple_23: -4048271166704032265
+      Small_Panel_purple_3: -1969101657710113400
+      Small_Panel_purple_4: -9031754797591976264
+      Small_Panel_purple_5: 6144160895268603088
+      Small_Panel_purple_6: 4652760119096739353
+      Small_Panel_purple_7: 7056715032721452316
+      Small_Panel_purple_8: 5055342273044891546
+      Small_Panel_purple_9: 711885732647802277
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
