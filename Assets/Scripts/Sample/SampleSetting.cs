@@ -13,8 +13,10 @@ public class SampleSetting : MonoBehaviour
     public DamagePopUpPool damagePopUpPool;
     void Start()
     {
-        ally = new UnitState();
-        enemy = new UnitState();
+        ally = new UnitState(50,2);
+        enemy = new UnitState(80,3);
+        ally.OnThisUnitDeath += AllyDie;
+        enemy.OnThisUnitDeath += EnemyDie;
         allyUi.Bind(ally);
         enemyUi.Bind(enemy);
         ally.pool = damagePopUpPool;
@@ -51,6 +53,18 @@ public class SampleSetting : MonoBehaviour
     public void TurnTextRefresh()
     {
         turnText.text = $"Turn {bm.turnProcesser.turn}";
+    }
+
+    public void AllyDie()
+    {
+        if (bm.turnProcesser.isAltered == false) return;
+        Debug.Log("ÆÐ¹è");
+    }
+
+    public void EnemyDie()
+    {
+        if (bm.turnProcesser.isAltered == false) return;
+        Debug.Log("½Â¸®");
     }
 
 

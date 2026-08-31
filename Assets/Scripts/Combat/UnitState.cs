@@ -9,8 +9,9 @@ public class UnitState
 {
     public UnitState target;
     public event Action OnStatusChanged;
-    public int maxHp = 50;
-    private int currentHp = 50;
+    public event Action OnThisUnitDeath;
+    public int maxHp;
+    private int currentHp;
     public int CurrentHp
     {
         get => currentHp; 
@@ -19,10 +20,12 @@ public class UnitState
             int newHp = Mathf.Clamp(value, 0, maxHp);
             currentHp = newHp;
             OnStatusChanged?.Invoke();
+            if (currentHp ==0) OnThisUnitDeath?.Invoke();
         } 
     }
     private int MaxMana = 10;
-    private int currentMana = 2;
+    private int startMana;
+    private int currentMana;
     public int CurrentMana
     {
         get => currentMana;
@@ -62,14 +65,21 @@ public class UnitState
     }
 
 
-    public UnitState()
+    public UnitState(int maxHp ,int startMana)
     {
+        this.maxHp = maxHp;
+        currentHp = maxHp;
+        this.startMana = startMana;
+        currentMana = startMana;
+
         AddSkillData(new DefaultAttack());
         AddSkillData(new FlameStrike());
         AddSkillData(new DefaultDeffense());
         AddSkillData(new PoisonedArmor());
         AddSkillData(new DefaultCharge());
         AddSkillData(new PowerCharge());
+        AddStatusEffect(new StartMana(amount: startMana, duration: 3));
+
     }
 
     public int TakeDamage(int damage)
@@ -178,7 +188,7 @@ public class UnitState
     {
         currentHp = maxHp;
         StatusEffects.Clear();
-        currentMana = 2;
+        currentMana = startMana;
         foreach(SkillData skill in skills)
         {
             skill.currentCooldown = 0;

@@ -22,6 +22,7 @@ public class TurnProcesser
     public BattlePresenter battlePresenter;
     public List<CombatCommand> commands = new List<CombatCommand>();
     public bool isProcessing = false;
+    public bool isAltered = false;
     public Action turnPanelRefresh;
 
     public int turn = 0;
@@ -95,6 +96,7 @@ public class TurnProcesser
     public void ProcessOpenTurn(SkillData skill)
     {
         if (isProcessing) return;
+        if (isAltered == false) return;
 
         isProcessing = true;
         SelectSkill();

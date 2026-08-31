@@ -61,8 +61,9 @@ public class AlterPastPanel : MonoBehaviour
 
     public void HidePanel()
     {
-        gameObject.transform.DOScale(Vector3.one * 0.5f, 0.2f).SetEase(Ease.OutBack);
-        gameObject.SetActive(false);
+        DG.Tweening.Sequence sequence = DOTween.Sequence();
+        sequence.Append(gameObject.transform.DOScale(Vector3.one * 0.1f, 0.13f));
+        sequence.AppendCallback(() => gameObject.SetActive(false));
     }
 
     public void AlterThePast()
@@ -72,6 +73,7 @@ public class AlterPastPanel : MonoBehaviour
         {
             sampleSetting.bm.turnProcesser.selectedBuffs[i] = turnButtons[i].locatedBuff;
         }
+        sampleSetting.bm.turnProcesser.isAltered = true;
         sampleSetting.ReplayBlindTurns();
     }
 }
