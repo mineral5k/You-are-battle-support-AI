@@ -61,6 +61,7 @@ public class BattlePresenter : MonoBehaviour
 
                     break;
             }
+            if(turnProcesser.isBattleEnded) yield break;
         }
 
         allyPanel.HidePanel();
@@ -71,6 +72,7 @@ public class BattlePresenter : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         turnProcesser.EndOpenTurn(allyAction,enemyAction);
         yield return new WaitForSeconds(0.3f);
+        if (turnProcesser.isBattleEnded) yield break;
         turnProcesser.StartTurn();
         yield return new WaitForSeconds(0.3f);
     }
@@ -84,6 +86,7 @@ public class BattlePresenter : MonoBehaviour
             SelectedAction enemyAction = new SelectedAction(turnProcesser.enemySkillRecord[i], turnProcesser.enemy);
             List<CombatCommand> commands = turnProcesser.CreatComands(allyAction, enemyAction);
             yield return PlayCommands(commands);
+            if (turnProcesser.isBattleEnded) yield break;
         }
     }
 

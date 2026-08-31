@@ -101,6 +101,15 @@ public class UnitState
                 anim.SetTrigger("Hurt");
             }
         }
+        else
+        {
+            if (anim != null)
+            {
+                DamagePopUp damagePopUp = pool.GetPopUp();
+                damagePopUp.transform.position = anim.transform.position + new Vector3(1.5f, 1f, 0);
+                damagePopUp.PopUp("Blocked");
+            }
+        }
         CurrentHp = Mathf.Max(0, CurrentHp - hpDamage);
         OnStatusChanged?.Invoke();
 

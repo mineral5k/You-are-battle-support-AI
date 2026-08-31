@@ -1,5 +1,7 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SampleSetting : MonoBehaviour
 {
@@ -11,6 +13,12 @@ public class SampleSetting : MonoBehaviour
     public HPBarUI enemyUi;
     public TMP_Text turnText;
     public DamagePopUpPool damagePopUpPool;
+
+    [SerializeField] private RectTransform resultImage;
+    [SerializeField] private Sprite victory;
+    [SerializeField] private Sprite defeat;
+    [SerializeField] private Sprite draw;
+    private Vector2 targetPosition;
     void Start()
     {
         ally = new UnitState(50,2);
@@ -29,6 +37,7 @@ public class SampleSetting : MonoBehaviour
         bm.ProcessBlindTurn();
         bm.ProcessBlindTurn();
         bm.ProcessBlindTurn();
+        targetPosition = resultImage.anchoredPosition;
     }
 
     public void PlayOpenTurn(SkillData skill)
@@ -58,13 +67,49 @@ public class SampleSetting : MonoBehaviour
     public void AllyDie()
     {
         if (bm.turnProcesser.isAltered == false) return;
+        bm.turnProcesser.isBattleEnded = true;
+        ally.anim.SetBool("Death", true);
+        ShowResult(defeat);
         Debug.Log("菩硅");
     }
 
     public void EnemyDie()
     {
         if (bm.turnProcesser.isAltered == false) return;
-        Debug.Log("铰府");
+        if (bm.turnProcesser.isBattleEnded == true)
+        {
+            enemy.anim.SetBool("Death", true);
+            ShowResult(draw);
+            Debug.Log("公铰何");
+        }
+        else
+        {
+            bm.turnProcesser.isBattleEnded = true;
+            enemy.anim.SetBool("Death", true);
+            ShowResult(victory);
+            Debug.Log("铰府");
+        }
+    }
+
+    public void ShowResult(Sprite result)
+    {
+        Image image = resultImage.gameObject.GetComponent<Image>();
+        image.sprite = result;
+
+        
+
+        resultImage.DOKill();
+
+        resultImage.anchoredPosition =
+            targetPosition + Vector2.up * 500f;
+
+        resultImage.gameObject.SetActive(true);
+
+        resultImage
+            .DOAnchorPosY(targetPosition.y, 1.2f)
+            .SetDelay(0.9f)
+            .SetEase(Ease.OutBounce)
+            .SetUpdate(true);
     }
 
 

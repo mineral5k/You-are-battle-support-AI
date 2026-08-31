@@ -23,6 +23,7 @@ public class TurnProcesser
     public List<CombatCommand> commands = new List<CombatCommand>();
     public bool isProcessing = false;
     public bool isAltered = false;
+    public bool isBattleEnded = false;
     public Action turnPanelRefresh;
 
     public int turn = 0;
