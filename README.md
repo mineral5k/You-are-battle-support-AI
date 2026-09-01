@@ -16,6 +16,9 @@
 
 ---
 
+## 시연 영상
+https://youtu.be/6zPypDp69dU
+
 ## Core Features
 
 ### 1. Blind Turn 기록 및 과거 개변
