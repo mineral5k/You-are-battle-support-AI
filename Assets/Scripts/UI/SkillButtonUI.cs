@@ -48,6 +48,7 @@ public class SkillButtonUI : MonoBehaviour, IPointerEnterHandler,IPointerExitHan
     {
         tooltip.Show(skill, transform);
         hpBarUI.ShineMana(skill);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.UIEnter);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -62,5 +63,6 @@ public class SkillButtonUI : MonoBehaviour, IPointerEnterHandler,IPointerExitHan
         {
             sampleSetting.bm.turnProcesser.ProcessOpenTurn(skill);
         }
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.UIClick);
     }
 }

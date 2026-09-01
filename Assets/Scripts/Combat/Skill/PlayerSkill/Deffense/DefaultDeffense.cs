@@ -7,7 +7,7 @@ public class DefaultDeffense : SkillData
     {
         skillId = "deffense";
         skillName = "기본 방어";
-        skillDescription = "5의 방어도를 얻는다.";
+        skillDescription = "8의 방어도를 얻는다.";
         category = ActionCategory.Defense;
 
         manaCostType = ManaCostType.Fixed;
@@ -15,10 +15,10 @@ public class DefaultDeffense : SkillData
         fixedManaCost = 0;
         maxManaCost = 0;
 
-        baseValue = 5;
+        baseValue = 8;
         valuePerMana = 0;
 
-        cooltime = 0;
+        cooltime = 2;
 
         SEList.Add(StatusEffectType.Shield);
 

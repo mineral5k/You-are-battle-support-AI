@@ -54,6 +54,7 @@ public class AlterPastPanel : MonoBehaviour
 
     public void ShowPanel()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.StartAlter);
         gameObject.transform.localScale = Vector3.one * 0.5f;
         gameObject.SetActive(true);
         gameObject.transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack);
@@ -61,6 +62,7 @@ public class AlterPastPanel : MonoBehaviour
 
     public void HidePanel()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.QuitAlter);
         DG.Tweening.Sequence sequence = DOTween.Sequence();
         sequence.Append(gameObject.transform.DOScale(Vector3.one * 0.1f, 0.13f));
         sequence.AppendCallback(() => gameObject.SetActive(false));

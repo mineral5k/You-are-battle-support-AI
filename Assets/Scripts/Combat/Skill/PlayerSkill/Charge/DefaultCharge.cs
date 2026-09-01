@@ -17,7 +17,7 @@ public class DefaultCharge : SkillData
         baseValue = 0;
         valuePerMana = 0;
         
-        cooltime = 0;
+        cooltime = 2;
     }
 
     public override void Effect(UnitState ally, UnitState enemy, int value)

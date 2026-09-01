@@ -8,9 +8,11 @@ public class OperatingBar : MonoBehaviour
 
     [SerializeField] private float loadingDuration = 5f;
 
-    private void Awake()
+    private void Start()
     {
+        gameObject.SetActive(true);
         loadingFill.fillAmount = 0f;
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.Operating);
 
         loadingFill
             .DOFillAmount(1f, loadingDuration)
@@ -18,6 +20,7 @@ public class OperatingBar : MonoBehaviour
             .OnComplete(() =>
             {
                 Hide();
+                AudioManager.Instance.PlayBGM();
             });
     }
 

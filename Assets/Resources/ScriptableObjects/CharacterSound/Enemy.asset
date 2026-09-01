@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7666c1d66db6d74c9a96a964ec02958, type: 3}
+  m_Name: Enemy
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterSounds
+  attack: {fileID: 8300000, guid: 9d4b778b33200764b808eb427d80b56c, type: 3}
+  hurt: {fileID: 8300000, guid: d763ba750204e4142b4762d734444b96, type: 3}
+  nonAttack: {fileID: 8300000, guid: a475c3fdfbb15c2459b323aaee5d215d, type: 3}
+  death: {fileID: 8300000, guid: 750a7784248a3e84ebbd8aebb87d4c6a, type: 3}

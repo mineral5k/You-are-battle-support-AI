@@ -101,6 +101,8 @@ public class BattlePresenter : MonoBehaviour
         command.target.anim = enemyAnim;
         VS.SetActive(true);
 
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.RevealSkill);
+
         allyPanel.transform.localScale = Vector3.one * 0.3f;
         allyPanel.gameObject.SetActive(true);
         allyPanel.transform.DOScale(normalScale, 0.2f).SetEase(Ease.OutBack);
@@ -123,6 +125,8 @@ public class BattlePresenter : MonoBehaviour
 
 
         VS.SetActive(false);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.Clash);
+
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
         sequence.Append(allyPanelTransform.DOAnchorPosX(470f, 0.25f).SetEase(Ease.InCubic));
@@ -156,6 +160,7 @@ public class BattlePresenter : MonoBehaviour
 
     private IEnumerator ExecuteSkill(CombatCommand command)
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.ExcuteSkill);
         bool isAttack = command.allyAction.skill.category == ActionCategory.Attack;
         SkillRevealPanel panel = command.isAlly ? allyPanel : enemyPanel;
         panel.transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0f), 0.2f, 1, 0.5f);
@@ -194,6 +199,7 @@ public class BattlePresenter : MonoBehaviour
     private IEnumerator PlayNonAttackEffect(UnitState unit)
     {
         unit.anim.SetBool("Defense", true);
+        unit.anim.GetComponent<CharacterSoundPlayer>().PlayNonAttack();
         yield return new WaitForSeconds(0.7f);
         unit.anim.SetBool("Defense", false);
     }

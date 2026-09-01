@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7666c1d66db6d74c9a96a964ec02958, type: 3}
+  m_Name: Ally
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterSounds
+  attack: {fileID: 8300000, guid: 1846b29b323039b428188e13544104e6, type: 3}
+  hurt: {fileID: 8300000, guid: 4744716056f71ff4db2b1da855e45473, type: 3}
+  nonAttack: {fileID: 8300000, guid: a475c3fdfbb15c2459b323aaee5d215d, type: 3}
+  death: {fileID: 8300000, guid: 73000631b5cf8984dbbe90a2bf993571, type: 3}

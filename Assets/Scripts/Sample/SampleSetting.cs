@@ -69,8 +69,7 @@ public class SampleSetting : MonoBehaviour
         if (bm.turnProcesser.isAltered == false) return;
         bm.turnProcesser.isBattleEnded = true;
         ally.anim.SetBool("Death", true);
-        ShowResult(defeat);
-        Debug.Log("ÆÐ¹è");
+        ShowResult(defeat,"Defeat");
     }
 
     public void EnemyDie()
@@ -79,37 +78,63 @@ public class SampleSetting : MonoBehaviour
         if (bm.turnProcesser.isBattleEnded == true)
         {
             enemy.anim.SetBool("Death", true);
-            ShowResult(draw);
-            Debug.Log("¹«½ÂºÎ");
+            ShowResult(draw, "Draw");
         }
         else
         {
             bm.turnProcesser.isBattleEnded = true;
             enemy.anim.SetBool("Death", true);
-            ShowResult(victory);
-            Debug.Log("½Â¸®");
+            ShowResult(victory, "Victory");
         }
     }
 
-    public void ShowResult(Sprite result)
+    public void ShowResult(Sprite result, string rst)
     {
         Image image = resultImage.gameObject.GetComponent<Image>();
         image.sprite = result;
+
+        AudioClip clip;
+
+        switch (rst)
+        {
+            case "Victory":
+                clip = AudioManager.Instance.Victory;
+                break;
+            case "Defeat":
+                clip = AudioManager.Instance.Defeat;
+                break;
+            case "Draw":
+                clip = AudioManager.Instance.Defeat;
+                break;
+            default:
+                clip = AudioManager.Instance.Defeat; 
+                break;
+        }
 
         
 
         resultImage.DOKill();
 
+        DG.Tweening.Sequence sequence = DOTween.Sequence();
+
         resultImage.anchoredPosition =
             targetPosition + Vector2.up * 500f;
 
         resultImage.gameObject.SetActive(true);
+        sequence.Append
+            (
 
-        resultImage
-            .DOAnchorPosY(targetPosition.y, 1.2f)
-            .SetDelay(0.9f)
-            .SetEase(Ease.OutBounce)
-            .SetUpdate(true);
+             resultImage
+                .DOAnchorPosY(targetPosition.y, 1.2f)
+                .SetDelay(0.9f)
+                .SetEase(Ease.OutBounce)
+                .SetUpdate(true)
+
+            );
+        sequence.AppendCallback(() => AudioManager.Instance.PlaySFX(clip));
+
+        
+
     }
 
 

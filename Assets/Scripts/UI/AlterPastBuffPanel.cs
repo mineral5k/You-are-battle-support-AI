@@ -60,11 +60,13 @@ public class AlterPastBuffPanel : MonoBehaviour, IPointerEnterHandler, IPointerE
             isSelected = true;
             alterPanel.SelectBuff(this);
         }
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.AlterUIClick);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         ShowOutline();
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.AlterUIEnter);
     }
 
     public void OnPointerExit(PointerEventData eventData)

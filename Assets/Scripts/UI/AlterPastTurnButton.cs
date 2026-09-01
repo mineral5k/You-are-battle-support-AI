@@ -52,11 +52,13 @@ public class AlterPastTurnButton : MonoBehaviour,IPointerEnterHandler,IPointerEx
     public void OnPointerClick(PointerEventData eventData)
     {
         alterPanel.SelectTurn(this);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.AlterUIClick);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         ShowOutline();
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.AlterUIEnter);
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -25,6 +25,8 @@ public class SEIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         tooltip.Show(effect, transform);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.UIEnter);
+
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -21,7 +21,7 @@ public class FlameStrike : SkillData
         baseValue = 3;
         valuePerMana = 3;
 
-        cooltime = 3;
+        cooltime = 4;
 
         SEList.Add(StatusEffectType.Burn);
     }

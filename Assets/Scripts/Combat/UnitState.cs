@@ -108,6 +108,7 @@ public class UnitState
                 DamagePopUp damagePopUp = pool.GetPopUp();
                 damagePopUp.transform.position = anim.transform.position + new Vector3(1.5f, 1f, 0);
                 damagePopUp.PopUp("Blocked");
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.BlockSound);
             }
         }
         CurrentHp = Mathf.Max(0, CurrentHp - hpDamage);
@@ -189,7 +190,10 @@ public class UnitState
 
         statusEffects.RemoveAll(effect => effect.IsExpired);
         OnStatusChanged?.Invoke();
-        TakeDamage(bookedDamage);
+        if (bookedDamage > 0)
+        {
+            TakeDamage(bookedDamage);
+        }
         bookedDamage = 0;
     }
 

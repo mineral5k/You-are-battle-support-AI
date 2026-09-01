@@ -112,7 +112,7 @@ public class TurnProcesser
         switch(selectedBuffs[turn-1])
         {
             case selectedBuff.AttackUp:
-                ally.AddStatusEffect(new AttackUp(4, 1));
+                ally.AddStatusEffect(new AttackUp(6, 1));
                 break;
 
             case selectedBuff.GainShield:
