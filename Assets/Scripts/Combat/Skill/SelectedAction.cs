@@ -16,6 +16,11 @@ public class SelectedAction
         }
 
         spentMana = skill.CalculateManaCost(unit.CurrentMana);
-        finalValue = skill.CalculateValue(spentMana) + unit.AttackUp;
+        int attackBuff = 0;
+        if (skill.category == ActionCategory.Attack)
+        {
+            attackBuff = unit.AttackUp;
+        }
+        finalValue = skill.CalculateValue(spentMana) + attackBuff;
     }
 }
