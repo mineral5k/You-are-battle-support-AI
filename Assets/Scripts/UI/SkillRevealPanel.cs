@@ -35,6 +35,7 @@ public class SkillRevealPanel : MonoBehaviour
         RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
 
         breakSequence.Append(rectTransform.DOAnchorPos(originalPos, 0.25f).SetEase(Ease.OutCubic));
+        breakSequence.JoinCallback(() => AudioManager.Instance.PlaySFX(AudioManager.Instance.ClashBreak));
         breakSequence.Append(transform.DOPunchRotation(new Vector3(0f, 0f, 12f), 0.15f, 5, 0.5f));
         breakSequence.Append(transform.DOScale(new Vector3(0.15f, 0.65f, 1f), 0.12f).SetEase(Ease.InBack));
 
